@@ -13,5 +13,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/app.js
+          node --check vendor/cvnss4.min.js
       - name: Check bundled scripts, CSP, simulation dataset and pinned codec
         run: node scripts/security-audit.mjs
