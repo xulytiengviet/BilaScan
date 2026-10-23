@@ -1,0 +1,17 @@
+name: BilaScan static safety checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check bundled scripts, CSP, simulation dataset and pinned codec
+        run: node scripts/security-audit.mjs
