@@ -24,7 +24,15 @@ Từ khóa được đổi 1–1; bình luận, chuỗi ký tự và identifier 
 
 ## CVNSS4.0
 
-Nút CVNSS4.0 dùng codec `Vietflexmap/CVNSS4@v1.0.1` qua jsDelivr khi có mạng. Vì CVNSS4.0 là ánh xạ nhiều-một, nó **chỉ dùng để hiển thị**, không phải đầu vào của bộ chuyển B1 song ánh. Nếu CDN không có, giao diện báo trạng thái, không tự đoán chữ chuyển đổi.
+Nút CVNSS4.0 dùng codec đã được đưa vào repository ở `vendor/cvnss4.min.js`, không nạp JavaScript từ CDN khi chạy. Vì CVNSS4.0 là ánh xạ nhiều-một, nó **chỉ dùng để hiển thị**, không phải đầu vào của bộ chuyển B1 song ánh. Nếu thiếu hoặc lỗi tệp nội bộ, giao diện báo trạng thái, không tự đoán chữ chuyển đổi.
+
+## Giới hạn an toàn và bản kiểm tra 23/10/2026
+
+- Ứng dụng là **demo read-only/offline**: không có đăng nhập, không hỏi mật khẩu, seed phrase, private key hoặc kết nối ví; không gọi RPC ngoài.
+- Trang chỉ nạp hai script nội bộ: `assets/app.js` và `vendor/cvnss4.min.js`; Content Security Policy giới hạn JavaScript vào cùng origin và cấm `connect-src`.
+- Nút **Xuất JSON** và **Tải Solidity .sol** chỉ thực hiện khi người dùng chủ động bấm; dữ liệu được tạo ngay trong trình duyệt, không tải phần mềm thực thi từ máy chủ.
+- Chạy `node scripts/security-audit.mjs` để kiểm tra tĩnh và xem [GitHub Actions](../../actions) để xác nhận kết quả CI. Đây **không phải** kiểm toán bảo mật toàn diện hoặc chứng nhận của Google.
+- Khi một Google Search Console property báo `Deceptive pages` nhưng `Sample URLs: N/A`, không thể quy kết một repository chỉ dựa vào tên miền chung. Cần đối chiếu trạng thái triển khai và tiếp tục rà soát các project sites liên quan.
 
 ## Cảnh báo kỹ thuật
 
