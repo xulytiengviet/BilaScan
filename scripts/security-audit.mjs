@@ -18,6 +18,11 @@ assert.match(html,/connect-src 'none'/);
 assert.doesNotMatch(html,/https?:\/\/[\w.-]+\/(?:[^"']*\.js)/,'No remote JavaScript');
 assert.doesNotMatch(app,/\b(?:fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon)\s*\(/,'Demo app should not make network requests');
 assert.doesNotMatch(app,/\b(?:eval|Function)\s*\(/,'No dynamic code evaluation');
+assert.doesNotMatch(html,/<input\\b[^>]*\\btype\\s*=\\s*["']?password/i,'No password fields');
+for(const [name,source] of [['app',app],['vendor',vendor]]) {
+  assert.doesNotMatch(source,/\\b(?:localStorage|sessionStorage|document\\.cookie)\\b/i,name+' must not read persistent browser secrets');
+  assert.doesNotMatch(source,/\\b(?:fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon)\\s*\\(/,name+' must not send network requests');
+}
 assert.equal(data.simulated,true);
 assert.equal(data.wallets.length,16);
 assert.equal(data.programs.length,4);
