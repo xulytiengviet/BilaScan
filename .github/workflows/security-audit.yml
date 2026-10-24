@@ -19,3 +19,13 @@ jobs:
           node --check vendor/cvnss4.min.js
       - name: Check bundled scripts, CSP, simulation dataset and pinned codec
         run: node scripts/security-audit.mjs
+      - name: Build Cloudflare Pages static output
+        run: |
+          node scripts/build-pages.mjs
+          test -f dist/index.html
+          test -f dist/_headers
+          test -f dist/assets/app.js
+          test -f dist/vendor/cvnss4.min.js
+          test ! -e dist/.github
+          test ! -e dist/scripts
+
