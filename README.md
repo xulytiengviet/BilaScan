@@ -6,6 +6,11 @@ Trang HTML miễn phí, giao diện tiếng Việt, mô phỏng explorer kiểu 
 
 Mở [index.html](index.html) trực tiếp trên trình duyệt hoặc xuất bản qua GitHub Pages (Settings → Pages → Deploy from a branch → main / root).
 
+
+## Cloudflare Pages (recommended for alternate hostname)
+
+Use [Cloudflare deployment instructions](CLOUDFLARE_PAGES.md) for the precise project setup. Connect GitHub repository **xulytiengviet/BilaScan**, choose **main**, build command **node scripts/build-pages.mjs**, and output directory **dist**. Cloudflare assigns the final `*.pages.dev` hostname once the project is created. The build publishes only essential read-only simulation assets and restrictive security headers.
+
 ## Dữ liệu mẫu
 
 - **100 giao dịch giả lập xác định** được sinh theo công thức seed cố định trong JavaScript. Reload vẫn cho cùng lịch sử; nút **Xuất JSON** tải cả 100 giao dịch cùng 16 ví và 4 chương trình.
